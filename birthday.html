@@ -11,6 +11,10 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        *::-webkit-scrollbar{
+            display: none;
+        }
 
         :root {
             --cream: #fef9f3;
@@ -299,7 +303,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            overflow-y: auto;
             background: linear-gradient(135deg, #fef9f3 0%, #f5e6d3 100%);
             display: flex;
             flex-direction: column;
@@ -323,7 +326,6 @@
         .candles-container {
             max-width: 900px;
             width: 100%;
-            padding: 60px 5vw;
             text-align: center;
             position: relative;
             animation: fadeIn 1s ease-out;
@@ -331,9 +333,9 @@
 
         .candles-page h1 {
             font-family: 'Caveat', cursive;
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-size: 3.5rem;
             color: var(--warm-brown);
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 0px rgba(212, 165, 165, 0.3);
             font-weight: 700;
             transition: color 1s ease;
@@ -345,10 +347,10 @@
         }
 
         .candles-subtitle {
-            font-size: clamp(0.95rem, 2.8vw, 1.3rem);
+            font-size: 1.3rem;
             color: var(--ink);
             opacity: 0.7;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             transition: color 1s ease;
         }
 
@@ -357,14 +359,12 @@
             opacity: 0.8;
         }
 
-        /* Row that holds cake on left, image on right */
         .cake-and-image-row {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: clamp(16px, 4vw, 40px);
-            min-height: 240px;
-            flex-wrap: wrap;
+            gap: 60px;
+            min-height: 230px;
         }
 
         .cake-scene {
@@ -382,8 +382,8 @@
         }
 
         .cake-layer {
-            width: min(200px, 52vw);
-            height: clamp(34px, 8vw, 50px);
+            width: 200px;
+            height: 50px;
             background: linear-gradient(135deg, #a8e6cf 0%, #87cebc 50%, #6ec4a7 100%);
             border-radius: 10px;
             box-shadow: 
@@ -421,8 +421,8 @@
         }
 
         .cake-layer:first-child {
-            width: min(160px, 42vw);
-            height: clamp(30px, 7vw, 45px);
+            width: 160px;
+            height: 45px;
             background: linear-gradient(
                 135deg,
                 rgb(250, 245, 235) 0%,
@@ -441,8 +441,8 @@
         }
 
         .cake-layer:last-child {
-            width: min(240px, 62vw);
-            height: clamp(38px, 9vw, 55px);
+            width: 240px;
+            height: 55px;
             background: linear-gradient(
                 135deg,
                 rgb(245, 215, 220) 0%,  
@@ -452,7 +452,7 @@
         }
 
         .cake-plate {
-            width: min(280px, 72vw);
+            width: 280px;
             height: 15px;
             background: linear-gradient(135deg, #d4a5a5, #c49595);
             border-radius: 50%;
@@ -464,19 +464,19 @@
 
         .candles-group {
             position: absolute;
-            top: clamp(-42px, -10vw, -50px);
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: clamp(18px, 6vw, 35px);
+            gap: 35px;
             align-items: flex-end;
             z-index: 10;
         }
 
         .candle-stick {
             position: relative;
-            width: clamp(9px, 3vw, 14px);
-            height: clamp(38px, 10vw, 50px);
+            width: 14px;
+            height: 50px;
             background: linear-gradient(to right,
                 #4ecdc4 0%,
                 #5fd9cf 10%,
@@ -504,7 +504,7 @@
 
         .candle-stick:nth-child(1) { 
             animation-delay: 0s; 
-            height: clamp(40px, 11vw, 55px);
+            height: 55px;
             background: linear-gradient(to right,
                 #ff6b6b 0%,
                 #ff8787 10%,
@@ -514,7 +514,7 @@
         }
         .candle-stick:nth-child(2) { 
             animation-delay: 0.5s; 
-            height: clamp(38px, 10vw, 50px);
+            height: 50px;
             background: linear-gradient(to right,
                 #f9ca24 0%,
                 #fad859 10%,
@@ -524,7 +524,7 @@
         }
         .candle-stick:nth-child(3) { 
             animation-delay: 1s; 
-            height: clamp(39px, 10.5vw, 52px);
+            height: 52px;
             background: linear-gradient(to right,
                 #6c5ce7 0%,
                 #8776f0 10%,
@@ -554,7 +554,7 @@
 
         .flame-container {
             position: absolute;
-            top: clamp(-38px, -9.5vw, -45px);
+            top: -45px;
             left: 50%;
             transform: translateX(-50%);
             width: 30px;
@@ -677,11 +677,10 @@
             }
         }
 
-        /* Blow button — compact, sits below the cake row */
         .blow-btn {
-            padding: clamp(8px, 2vw, 12px) clamp(20px, 6vw, 32px);
+            padding: 12px 32px;
             font-family: 'Patrick Hand', cursive;
-            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-size: 1.3rem;
             background: linear-gradient(135deg, var(--soft-orange), var(--muted-pink));
             color: white;
             border: 3px solid var(--warm-brown);
@@ -693,7 +692,7 @@
                 0 8px 20px rgba(0, 0, 0, 0.15);
             position: relative;
             top: 0;
-            margin-top: clamp(16px, 4vw, 28px);
+            margin-top: 28px;
             font-weight: 600;
             letter-spacing: 1px;
         }
@@ -721,9 +720,8 @@
 
         /* Surprise image — hidden, pops in to the right of cake */
         .surprise-image {
-            width: min(220px, 38vw);
-            height: min(220px, 38vw);
-            object-fit: cover;
+            width: 220px;
+            height: 220px;
             border-radius: 16px;
             border: 4px solid rgba(255,255,255,0.6);
             box-shadow:
@@ -752,9 +750,9 @@
 
         .wish-message {
             font-family: 'Caveat', cursive;
-            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-size: 2.8rem;
             color: var(--warm-brown);
-            margin-top: clamp(16px, 4vw, 30px);
+            margin-top: 30px;
             opacity: 0;
             transform: translateY(20px) scale(0.9);
             transition: all 1s ease;
@@ -824,38 +822,10 @@
 
         .back-to-book {
             position: fixed;
-            top: 16px;
-            left: 16px;
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            background: rgba(139, 115, 85, 0.15);
-            border: 2px solid var(--warm-brown);
-            box-shadow: none;
-            color: var(--warm-brown);
-            z-index: 1002;
-            transition: background 0.25s ease, transform 0.25s ease;
-        }
-
-        .back-to-book:hover {
-            background: rgba(139, 115, 85, 0.3);
-            transform: scale(1.1);
-            box-shadow: none;
-        }
-
-        .candles-page.dark .back-to-book {
-            background: rgba(245, 237, 228, 0.12);
-            border-color: rgba(245, 237, 228, 0.5);
-            color: #f5ede4;
-        }
-
-        .candles-page.dark .back-to-book:hover {
-            background: rgba(245, 237, 228, 0.25);
+            top: 25px;
+            left: 25px;
+            padding: 10px 22px;
+            font-size: 1rem;
         }
 
         /* ========== RESPONSIVE ========== */
@@ -895,6 +865,79 @@
                 height: 80px;
                 font-size: 60px;
                 margin: 15px 0;
+            }
+
+            .candles-page h1 {
+                font-size: 2.4rem;
+            }
+
+            .candles-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+            }
+
+            .cake-and-image-row {
+                flex-direction: column;
+                gap: 24px;
+                min-height: auto;
+            }
+
+            .surprise-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cake-layer {
+                width: 160px;
+                height: 40px;
+            }
+
+            .cake-layer:first-child {
+                width: 130px;
+                height: 36px;
+            }
+
+            .cake-layer:last-child {
+                width: 190px;
+                height: 44px;
+            }
+
+            .cake-plate {
+                width: 220px;
+            }
+
+            .candles-group {
+                gap: 25px;
+                top: -45px;
+            }
+
+            .candle-stick {
+                width: 11px;
+                height: 40px;
+            }
+
+            .candle-stick:nth-child(1) { height: 43px; }
+            .candle-stick:nth-child(2) { height: 40px; }
+            .candle-stick:nth-child(3) { height: 42px; }
+
+            .flame-container {
+                top: -38px;
+            }
+
+            .flame {
+                width: 20px;
+                height: 34px;
+            }
+
+            .blow-btn {
+                padding: 10px 28px;
+                font-size: 1.15rem;
+                margin-top: 20px;
+            }
+
+            .wish-message {
+                font-size: 2rem;
+                margin-top: 20px;
             }
         }
     </style>

@@ -11,6 +11,10 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        *::-webkit-scrollbar{
+            display: none;
+        }
 
         :root {
             --cream: #fef9f3;
@@ -34,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Lofi grain overlay */
         body::before {
             content: '';
             position: fixed;
@@ -48,7 +51,6 @@
             z-index: 1;
         }
 
-        /* Floating decorative elements */
         .deco {
             position: fixed;
             opacity: 0.1;
@@ -145,7 +147,6 @@
                 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Left page - always visible */
         .left-page {
             position: absolute;
             width: 300px;
@@ -162,7 +163,6 @@
             text-align: center;
         }
 
-        /* Right page - always visible */
         .right-page {
             position: absolute;
             width: 300px;
@@ -202,7 +202,6 @@
             opacity: 0.8;
         }
 
-        /* Decorative doodles on pages */
         .doodle {
             position: absolute;
             opacity: 0.15;
@@ -214,7 +213,6 @@
         .doodle.bottom-left { bottom: 10px; left: 10px; }
         .doodle.bottom-right { bottom: 10px; right: 10px; }
 
-        /* Tape effect */
         .tape {
             position: absolute;
             width: 60px;
@@ -280,7 +278,6 @@
             opacity: 0.8;
         }
 
-        /* Fade transition for page changes */
         .fade-out {
             animation: fadeOutContent 0.3s ease-out forwards;
         }
@@ -299,6 +296,539 @@
             to { opacity: 1; }
         }
 
+        /* ========== CANDLES PAGE ========== */
+        .candles-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fef9f3 0%, #f5e6d3 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease, background 1.2s ease;
+        }
+
+        .candles-page.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .candles-page.dark {
+            background: linear-gradient(135deg, #1a1410 0%, #0d0a08 100%);
+        }
+
+        .candles-container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .candles-page h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            color: var(--warm-brown);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(212, 165, 165, 0.3);
+            font-weight: 700;
+            transition: color 1s ease;
+        }
+
+        .candles-page.dark h1 {
+            color: #f5ede4;
+            text-shadow: 2px 2px 10px rgba(255, 200, 100, 0.3);
+        }
+
+        .candles-subtitle {
+            font-size: 1.3rem;
+            color: var(--ink);
+            opacity: 0.7;
+            margin-bottom: 30px;
+            transition: color 1s ease;
+        }
+
+        .candles-page.dark .candles-subtitle {
+            color: #f5ede4;
+            opacity: 0.8;
+        }
+
+        .cake-and-image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            min-height: 200px;
+        }
+
+        .cake-scene {
+            position: relative;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .cake-layers {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            position: relative;
+        }
+
+        .cake-layer {
+            width: 200px;
+            height: 50px;
+            background: linear-gradient(135deg, #a8e6cf 0%, #87cebc 50%, #6ec4a7 100%);
+            border-radius: 10px;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 -5px 10px rgba(0, 0, 0, 0.1),
+                inset 0 5px 10px rgba(255, 255, 255, 0.5);
+            position: relative;
+            margin: -5px 0;
+        }
+
+        .cake-layer::before {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 10%;
+            right: 10%;
+            height: 15px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.4) 20%,
+                rgba(255, 255, 255, 0.4) 80%,
+                transparent 100%);
+            border-radius: 50%;
+        }
+
+        .frosting {
+            position: absolute;
+            bottom: -2px;
+            left: -5px;
+            right: -5px;
+            height: 10px;
+            background: linear-gradient(90deg, #f0f8ff, #e6f3ff, #f0f8ff);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cake-layer:first-child {
+            width: 160px;
+            height: 45px;
+            background: linear-gradient(
+                135deg,
+                rgb(250, 245, 235) 0%,
+                rgb(245, 240, 230) 50%, 
+                rgb(235, 225, 210) 100% 
+            );
+        }
+
+        .cake-layer:nth-child(2) {
+            background: linear-gradient(
+                135deg,
+                rgb(235, 220, 200) 0%,  
+                rgb(225, 210, 190) 50%,
+                rgb(210, 195, 175) 100% 
+            );
+        }
+
+        .cake-layer:last-child {
+            width: 240px;
+            height: 55px;
+            background: linear-gradient(
+                135deg,
+                rgb(245, 215, 220) 0%,  
+                rgb(230, 200, 205) 50%, 
+                rgb(215, 180, 190) 100% 
+            );
+        }
+
+        .cake-plate {
+            width: 280px;
+            height: 15px;
+            background: linear-gradient(135deg, #d4a5a5, #c49595);
+            border-radius: 50%;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.4),
+                inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 5px;
+        }
+
+        .candles-group {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 35px;
+            align-items: flex-end;
+            z-index: 10;
+        }
+
+        .candle-stick {
+            position: relative;
+            width: 14px;
+            height: 50px;
+            background: linear-gradient(to right,
+                #4ecdc4 0%,
+                #5fd9cf 10%,
+                #45b7d1 50%,
+                #4ecdc4 90%,
+                #3ab5ad 100%);
+            border-radius: 7px;
+            box-shadow: 
+                inset 3px 0 6px rgba(255, 255, 255, 0.5),
+                inset -3px 0 6px rgba(0, 0, 0, 0.3),
+                0 6px 12px rgba(0, 0, 0, 0.3);
+            animation: candleWobble 3s ease-in-out infinite;
+        }
+
+        .candle-stick::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .candle-stick:nth-child(1) { 
+            animation-delay: 0s; 
+            height: 55px;
+            background: linear-gradient(to right,
+                #ff6b6b 0%,
+                #ff8787 10%,
+                #ee5a6f 50%,
+                #ff6b6b 90%,
+                #e85d75 100%);
+        }
+        .candle-stick:nth-child(2) { 
+            animation-delay: 0.5s; 
+            height: 50px;
+            background: linear-gradient(to right,
+                #f9ca24 0%,
+                #fad859 10%,
+                #f0b90b 50%,
+                #f9ca24 90%,
+                #e0b10a 100%);
+        }
+        .candle-stick:nth-child(3) { 
+            animation-delay: 1s; 
+            height: 52px;
+            background: linear-gradient(to right,
+                #6c5ce7 0%,
+                #8776f0 10%,
+                #5f4dd6 50%,
+                #6c5ce7 90%,
+                #5746c9 100%);
+        }
+
+        @keyframes candleWobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-1.5deg); }
+            75% { transform: rotate(1.5deg); }
+        }
+
+        .candle-stick::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 8px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(200, 200, 200, 0.6));
+            border-radius: 50% 50% 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .flame-container {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+        }
+
+        .flame {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 40px;
+            background: radial-gradient(ellipse at center bottom,
+                #ffffff 0%,
+                #ffff99 10%,
+                #ffdd44 25%,
+                #ff9944 55%,
+                #ff6644 75%,
+                transparent 100%);
+            border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+            filter: blur(0.8px);
+            animation: flameFlicker 0.12s ease-in-out infinite alternate;
+            opacity: 1;
+            transition: all 0.8s ease;
+        }
+
+        .candle-stick.blown .flame {
+            opacity: 0;
+            animation: flameBlowOut 0.6s ease-out forwards;
+        }
+
+        @keyframes flameFlicker {
+            0% { 
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                filter: brightness(1) blur(0.8px);
+            }
+            100% { 
+                transform: translateX(-50%) scaleY(0.88) scaleX(1.12) translateY(-3px);
+                filter: brightness(1.4) blur(1.2px);
+            }
+        }
+
+        @keyframes flameBlowOut {
+            0% {
+                transform: translateX(-50%) scaleY(1) scaleX(1);
+                opacity: 1;
+            }
+            40% {
+                transform: translateX(-60px) scaleY(0.4) scaleX(2) rotate(-45deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(-80px) scaleY(0.1) scaleX(3) rotate(-60deg);
+                opacity: 0;
+            }
+        }
+
+        .flame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 22px;
+            background: radial-gradient(ellipse at center,
+                #ffffee 0%,
+                #ffffcc 35%,
+                transparent 80%);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .flame::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 16px;
+            background: radial-gradient(ellipse at center,
+                #ffffff 0%,
+                transparent 70%);
+            border-radius: 50%;
+        }
+
+        .flame-glow {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle,
+                rgba(255, 220, 100, 0.6) 0%,
+                rgba(255, 180, 80, 0.4) 25%,
+                rgba(255, 140, 60, 0.2) 50%,
+                transparent 75%);
+            border-radius: 50%;
+            animation: glowPulse 1.2s ease-in-out infinite;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+            filter: blur(15px);
+        }
+
+        .candle-stick.blown .flame-glow {
+            opacity: 0;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.2);
+                opacity: 0.9;
+            }
+        }
+
+        .blow-btn {
+            padding: 12px 32px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--soft-orange), var(--muted-pink));
+            color: white;
+            border: 3px solid var(--warm-brown);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow:
+                0 4px 0 var(--warm-brown),
+                0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            top: 0;
+            margin-top: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .blow-btn:hover {
+            background: linear-gradient(135deg, var(--muted-pink), var(--sage));
+            transform: translateY(-2px) scale(1.04);
+            box-shadow:
+                0 6px 0 var(--warm-brown),
+                0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .blow-btn:active {
+            top: 4px;
+            box-shadow:
+                0 0 0 var(--warm-brown),
+                0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blow-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
+        }
+
+        /* Surprise image — hidden, pops in to the right of cake */
+        .surprise-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 16px;
+            border: 4px solid rgba(255,255,255,0.6);
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.3),
+                0 0 0 3px var(--muted-pink);
+            opacity: 0;
+            transform: scale(0.4) rotate(-6deg);
+            transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            flex-shrink: 0;
+        }
+
+        .surprise-image.show {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            pointer-events: auto;
+        }
+
+        .candles-page.dark .surprise-image {
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.5),
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 0 3px rgba(255, 215, 0, 0.5);
+        }
+
+        .wish-message {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: var(--warm-brown);
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 1s ease;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .candles-page.dark .wish-message {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .wish-message.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0;
+            animation: sparkleFloat 2.5s ease-out forwards;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0) rotate(0deg);
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-250px) scale(1.5) rotate(360deg);
+            }
+        }
+
+        .back-to-book {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            padding: 10px 22px;
+            font-size: 1rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .book {
                 width: 90vw;
@@ -336,310 +866,78 @@
                 font-size: 60px;
                 margin: 15px 0;
             }
-        }
 
-        /* Candles Page Styles */
-        .candles-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fef9f3 0%, #f5e6d3 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease, background 1s ease;
-        }
-
-        .candles-page.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .candles-page.dark {
-            background: linear-gradient(135deg, #2a2419 0%, #1a1612 100%);
-        }
-
-        .candles-container {
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .candles-page h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 3.5rem;
-            color: var(--warm-brown);
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px rgba(212, 165, 165, 0.3);
-            font-weight: 700;
-            transition: color 1s ease;
-        }
-
-        .candles-page.dark h1 {
-            color: #f5ede4;
-        }
-
-        .candles-subtitle {
-            font-size: 1.2rem;
-            color: var(--ink);
-            opacity: 0.7;
-            margin-bottom: 40px;
-            transition: color 1s ease;
-        }
-
-        .candles-page.dark .candles-subtitle {
-            color: #f5ede4;
-        }
-
-        .cake-container {
-            position: relative;
-            display: inline-block;
-            margin: 40px 0;
-        }
-
-        .cake {
-            font-size: 180px;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .candles {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-        }
-
-        .candle {
-            position: relative;
-            width: 8px;
-            height: 60px;
-            background: linear-gradient(to bottom, #ff9999 0%, #ff6666 100%);
-            border-radius: 4px;
-            animation: candleWiggle 2s ease-in-out infinite;
-        }
-
-        .candle:nth-child(1) { animation-delay: 0s; }
-        .candle:nth-child(2) { animation-delay: 0.3s; }
-        .candle:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes candleWiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-2deg); }
-            75% { transform: rotate(2deg); }
-        }
-
-        .flame {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 30px;
-            background: radial-gradient(ellipse at center, 
-                #ffff99 0%, 
-                #ffdd44 20%, 
-                #ff9944 50%, 
-                #ff6644 70%,
-                transparent 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: flicker 0.3s ease-in-out infinite alternate;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .candle.blown .flame {
-            opacity: 0;
-        }
-
-        @keyframes flicker {
-            0% { 
-                transform: translateX(-50%) scaleY(1) scaleX(1);
-                filter: brightness(1);
-            }
-            100% { 
-                transform: translateX(-50%) scaleY(0.95) scaleX(1.05);
-                filter: brightness(1.2);
-            }
-        }
-
-        .flame::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 15px;
-            background: radial-gradient(ellipse at center, 
-                #ffffcc 0%, 
-                transparent 70%);
-            border-radius: 50%;
-        }
-
-        .glow {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, 
-                rgba(255, 200, 100, 0.4) 0%, 
-                transparent 70%);
-            border-radius: 50%;
-            animation: glowPulse 2s ease-in-out infinite;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .candle.blown .glow {
-            opacity: 0;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.2); }
-        }
-
-        .blow-btn {
-            padding: 20px 50px;
-            font-family: 'Patrick Hand', cursive;
-            font-size: 1.5rem;
-            background: var(--soft-orange);
-            color: white;
-            border: 3px solid var(--warm-brown);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 
-                0 4px 0 var(--warm-brown),
-                0 8px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            top: 0;
-            margin-top: 30px;
-        }
-
-        .blow-btn:hover {
-            background: var(--muted-pink);
-            transform: translateY(-2px);
-            box-shadow: 
-                0 6px 0 var(--warm-brown),
-                0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .blow-btn:active {
-            top: 4px;
-            box-shadow: 
-                0 0 0 var(--warm-brown),
-                0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .blow-btn.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .wish-message {
-            font-family: 'Caveat', cursive;
-            font-size: 2.5rem;
-            color: var(--warm-brown);
-            margin-top: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease;
-            font-weight: 700;
-        }
-
-        .candles-page.dark .wish-message {
-            color: #f5ede4;
-        }
-
-        .wish-message.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1001;
-        }
-
-        .sparkle {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0;
-            animation: sparkleFloat 2s ease-out forwards;
-        }
-
-        @keyframes sparkleFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(0);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-200px) scale(1);
-            }
-        }
-
-        .back-to-book {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 12px 25px;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
             .candles-page h1 {
-                font-size: 2.5rem;
+                font-size: 2.4rem;
             }
 
-            .cake {
-                font-size: 120px;
+            .candles-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
             }
 
-            .candles {
-                gap: 15px;
-                top: -15px;
+            .cake-and-image-row {
+                flex-direction: column;
+                gap: 24px;
+                min-height: auto;
             }
 
-            .candle {
-                width: 6px;
-                height: 45px;
+            .surprise-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cake-layer {
+                width: 160px;
+                height: 40px;
+            }
+
+            .cake-layer:first-child {
+                width: 130px;
+                height: 36px;
+            }
+
+            .cake-layer:last-child {
+                width: 190px;
+                height: 44px;
+            }
+
+            .cake-plate {
+                width: 220px;
+            }
+
+            .candles-group {
+                gap: 25px;
+                top: -45px;
+            }
+
+            .candle-stick {
+                width: 11px;
+                height: 40px;
+            }
+
+            .candle-stick:nth-child(1) { height: 43px; }
+            .candle-stick:nth-child(2) { height: 40px; }
+            .candle-stick:nth-child(3) { height: 42px; }
+
+            .flame-container {
+                top: -38px;
+            }
+
+            .flame {
+                width: 20px;
+                height: 34px;
             }
 
             .blow-btn {
-                padding: 15px 35px;
-                font-size: 1.2rem;
+                padding: 10px 28px;
+                font-size: 1.15rem;
+                margin-top: 20px;
             }
 
             .wish-message {
                 font-size: 2rem;
+                margin-top: 20px;
             }
         }
     </style>
@@ -657,18 +955,11 @@
 
         <div class="flipbook-container">
             <div class="book" id="book">
-                <!-- Left page -->
                 <div class="left-page" id="leftPage">
-                    <div class="page-content" id="leftContent">
-                        <!-- Content will be updated by JavaScript -->
-                    </div>
+                    <div class="page-content" id="leftContent"></div>
                 </div>
-
-                <!-- Right page -->
                 <div class="right-page" id="rightPage">
-                    <div class="page-content" id="rightContent">
-                        <!-- Content will be updated by JavaScript -->
-                    </div>
+                    <div class="page-content" id="rightContent"></div>
                 </div>
             </div>
         </div>
@@ -680,38 +971,69 @@
         <div class="page-indicator" id="pageIndicator">Page 1-2 of 6</div>
     </div>
 
-    <!-- Candles Page (Hidden initially) -->
+    <!-- ===== CANDLES PAGE ===== -->
     <div class="candles-page" id="candlesPage">
+        <button class="back-to-book" onclick="hideCandlesPage()">← Back to Book</button>
+        
         <div class="candles-container">
-            <button class="back-to-book" onclick="hideCandlesPage()">← Back to Book</button>
-            
             <h1>Make a Wish! ✨</h1>
             <p class="candles-subtitle">Close your eyes and blow out the candles</p>
 
-            <div class="cake-container">
-                <div class="candles" id="candles">
-                    <div class="candle">
-                        <div class="glow"></div>
-                        <div class="flame"></div>
+            <!-- Cake + image side by side -->
+            <div class="cake-and-image-row">
+                <div class="cake-scene">
+                    <div class="candles-group" id="candlesGroup">
+                        <div class="candle-stick">
+                            <div class="flame-glow"></div>
+                            <div class="flame-container">
+                                <div class="flame"></div>
+                            </div>
+                        </div>
+                        <div class="candle-stick">
+                            <div class="flame-glow"></div>
+                            <div class="flame-container">
+                                <div class="flame"></div>
+                            </div>
+                        </div>
+                        <div class="candle-stick">
+                            <div class="flame-glow"></div>
+                            <div class="flame-container">
+                                <div class="flame"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="candle">
-                        <div class="glow"></div>
-                        <div class="flame"></div>
+
+                    <div class="cake-layers">
+                        <div class="cake-layer">
+                            <div class="frosting"></div>
+                        </div>
+                        <div class="cake-layer">
+                            <div class="frosting"></div>
+                        </div>
+                        <div class="cake-layer">
+                            <div class="frosting"></div>
+                        </div>
                     </div>
-                    <div class="candle">
-                        <div class="glow"></div>
-                        <div class="flame"></div>
-                    </div>
+                    <div class="cake-plate"></div>
                 </div>
-                <div class="cake">🎂</div>
+
+                <!-- Surprise image: hidden until candles blown -->
+                <img
+                    src="Montage Photo Vision board template Scrapbooking Classique Beige.png"
+                    id="surpriseImage"
+                    class="surprise-image"
+                    alt="Surprise"
+                />
             </div>
 
+            <!-- Blow button: below the row -->
             <button class="blow-btn" id="blowBtn" onclick="blowCandles()">
-                Blow 🌬️
+                Blow the Candles 🌬️
             </button>
 
             <div class="wish-message" id="wishMessage">
-                Your wish has been made! 🌟
+                Your wish has been made! 🌟<br>
+                <span style="font-size: 0.6em; opacity: 0.8;">May all your dreams come true ✨</span>
             </div>
         </div>
 
@@ -719,9 +1041,8 @@
     </div>
 
     <script>
-        // All the book pages (left and right content pairs)
+        // ===== BOOK PAGES =====
         const bookPages = [
-            // Spread 1: Pages 1-2
             {
                 left: `
                     <div class="tape top"></div>
@@ -738,7 +1059,6 @@
                     <p>Another trip around the sun, another collection of moments, another chapter of memories waiting to be written.</p>
                 `
             },
-            // Spread 2: Pages 3-4
             {
                 left: `
                     <div class="doodle top-left">☀</div>
@@ -754,7 +1074,6 @@
                     <p>For every laugh shared, every quiet moment, every time you've been exactly who you are. The world is better with you in it.</p>
                 `
             },
-            // Spread 3: Pages 5-6
             {
                 left: `
                     <div class="doodle top-left">❀</div>
@@ -772,7 +1091,7 @@
                     <p>Close your eyes, take a breath, and wish for something that makes your heart feel full. You deserve all the magic.</p>
                     <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">— with love, always ♡</p>
                     <p style="margin-top: 10px; font-size: 1rem; opacity: 0.8;">~Z</p>
-                    <button onclick="showCandlesPage()" style="margin-top: 5px; padding: 1px 1px; font-family: 'Patrick Hand', cursive; font-size: 1rem; background: var(--soft-orange); color: white; border: 3px solid var(--warm-brown); border-radius: 50px; cursor: pointer; box-shadow: 0 4px 0 var(--warm-brown), 0 8px 20px rgba(0, 0, 0, 0.1); position: relative; top: 0;">
+                    <button onclick="showCandlesPage()" style="margin-top: 5px; padding: 1px 1px; font-family: 'Patrick Hand', cursive; font-size: 1rem; background: var(--soft-orange); color: white; border: 3px solid var(--warm-brown); border-radius: 50px; cursor: pointer; box-shadow: 0 4px 0 var(--warm-brown), 0 8px 20px rgba(0, 0, 0, 0.1);">
                         Make Your Wish 🎂✨
                     </button>
                 `
@@ -781,29 +1100,22 @@
 
         let currentSpread = 0;
         const totalSpreads = bookPages.length;
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const pageIndicator = document.getElementById('pageIndicator');
-        const leftContent = document.getElementById('leftContent');
-        const rightContent = document.getElementById('rightContent');
 
         function updatePages() {
-            // Add fade out effect
+            const leftContent = document.getElementById('leftContent');
+            const rightContent = document.getElementById('rightContent');
+            
             leftContent.classList.add('fade-out');
             rightContent.classList.add('fade-out');
 
             setTimeout(() => {
-                // Update content
                 leftContent.innerHTML = bookPages[currentSpread].left;
                 rightContent.innerHTML = bookPages[currentSpread].right;
-
-                // Remove fade out and add fade in
                 leftContent.classList.remove('fade-out');
                 rightContent.classList.remove('fade-out');
                 leftContent.classList.add('fade-in');
                 rightContent.classList.add('fade-in');
 
-                // Remove fade in class after animation
                 setTimeout(() => {
                     leftContent.classList.remove('fade-in');
                     rightContent.classList.remove('fade-in');
@@ -812,12 +1124,11 @@
         }
 
         function updateButtons() {
-            prevBtn.disabled = currentSpread === 0;
-            nextBtn.disabled = currentSpread === totalSpreads - 1;
+            document.getElementById('prevBtn').disabled = currentSpread === 0;
+            document.getElementById('nextBtn').disabled = currentSpread === totalSpreads - 1;
             
             const startPage = (currentSpread * 2) + 1;
-            const endPage = startPage + 1;
-            pageIndicator.textContent = `Page ${startPage}-${endPage} of ${totalSpreads * 2}`;
+            document.getElementById('pageIndicator').textContent = `Page ${startPage}-${startPage + 1} of ${totalSpreads * 2}`;
         }
 
         function nextPage() {
@@ -836,80 +1147,120 @@
             }
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextPage();
             if (e.key === 'ArrowLeft') previousPage();
         });
 
-        // Initialize - show first spread
         updatePages();
         updateButtons();
 
-        // Candles Page Functions
+        // ===== CANDLES PAGE =====
         let candlesBlown = false;
 
         function showCandlesPage() {
             const candlesPage = document.getElementById('candlesPage');
             candlesPage.classList.add('active');
             
-            // Reset candles state
-            const candles = document.querySelectorAll('.candle');
-            candles.forEach(candle => candle.classList.remove('blown'));
-            
-            const blowBtn = document.getElementById('blowBtn');
-            const wishMessage = document.getElementById('wishMessage');
-            
-            blowBtn.classList.remove('hidden');
-            wishMessage.classList.remove('show');
+            // Reset everything
+            document.querySelectorAll('.candle-stick').forEach(c => c.classList.remove('blown'));
+            document.getElementById('blowBtn').classList.remove('hidden');
+            document.getElementById('wishMessage').classList.remove('show');
+            document.getElementById('surpriseImage').classList.remove('show');
             candlesPage.classList.remove('dark');
             candlesBlown = false;
         }
 
         function hideCandlesPage() {
-            const candlesPage = document.getElementById('candlesPage');
-            candlesPage.classList.remove('active');
+            document.getElementById('candlesPage').classList.remove('active');
         }
 
         function blowCandles() {
             if (candlesBlown) return;
+            candlesBlown = true;
 
-            const candles = document.querySelectorAll('.candle');
+            const candles = document.querySelectorAll('.candle-stick');
             const blowBtn = document.getElementById('blowBtn');
             const wishMessage = document.getElementById('wishMessage');
             const candlesPage = document.getElementById('candlesPage');
+            const surpriseImage = document.getElementById('surpriseImage');
 
-            // Blow out candles with delay
+            // Blow each candle with a stagger
             candles.forEach((candle, index) => {
                 setTimeout(() => {
                     candle.classList.add('blown');
-                }, index * 200);
+                    createSmoke(candle);
+                }, index * 300);
             });
 
-            // Hide button
-            setTimeout(() => {
-                blowBtn.classList.add('hidden');
-            }, 600);
+            // Hide button after all candles blown
+            setTimeout(() => blowBtn.classList.add('hidden'), 1100);
 
-            // Darken room
-            setTimeout(() => {
-                candlesPage.classList.add('dark');
-            }, 800);
+            // Darken background
+            setTimeout(() => candlesPage.classList.add('dark'), 1400);
 
-            // Show message
+            // Pop in the surprise image
+            setTimeout(() => surpriseImage.classList.add('show'), 1800);
+
+            // Show wish message + confetti + sparkles
             setTimeout(() => {
                 wishMessage.classList.add('show');
+                createConfetti();
                 createSparkles();
-            }, 1500);
+            }, 2400);
+        }
 
-            candlesBlown = true;
+        function createSmoke(candle) {
+            const smoke = document.createElement('div');
+            Object.assign(smoke.style, {
+                position: 'absolute',
+                top: '-40px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '4px',
+                height: '25px',
+                background: 'linear-gradient(to top, rgba(180, 180, 180, 0.7), transparent)',
+                borderRadius: '50%',
+                animation: 'smokeRise 1.8s ease-out forwards',
+                pointerEvents: 'none'
+            });
+            
+            candle.appendChild(smoke);
+            setTimeout(() => smoke.remove(), 1800);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    Object.assign(confetti.style, {
+                        position: 'fixed',
+                        width: Math.random() * 10 + 5 + 'px',
+                        height: Math.random() * 10 + 5 + 'px',
+                        background: color,
+                        left: Math.random() * 100 + '%',
+                        top: '-20px',
+                        borderRadius: Math.random() > 0.5 ? '50%' : '0',
+                        animation: `confettiFall ${Math.random() * 2 + 3}s ease-out forwards`,
+                        opacity: '0.8',
+                        zIndex: '1001'
+                    });
+                    
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 30);
+            }
         }
 
         function createSparkles() {
             const sparklesContainer = document.getElementById('sparkles');
-            const sparkleSymbols = ['✨', '⭐', '💫', '🌟', '✦'];
+            const sparkleSymbols = ['✨', '⭐', '💫', '🌟', '✦', '🎉', '🎊'];
 
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 40; i++) {
                 setTimeout(() => {
                     const sparkle = document.createElement('div');
                     sparkle.className = 'sparkle';
@@ -919,18 +1270,26 @@
                     sparkle.style.animationDelay = Math.random() * 0.5 + 's';
                     sparklesContainer.appendChild(sparkle);
 
-                    setTimeout(() => {
-                        sparkle.remove();
-                    }, 2000);
-                }, i * 100);
+                    setTimeout(() => sparkle.remove(), 2500);
+                }, i * 80);
             }
         }
+
+        // Smoke keyframes injected dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes smokeRise {
+                0% {
+                    opacity: 0.9;
+                    transform: translateX(-50%) translateY(0) scaleX(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-50px) scaleX(2.5);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
-
 </html>
-
-
-
-
-

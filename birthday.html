@@ -1316,6 +1316,8 @@
         if (envelopeOpened) return;
         envelopeOpened = true;
 
+        unlockSound();
+
         const wrap = document.getElementById('envelopeWrap');
         const screen = document.getElementById('envelopeScreen');
         const bookScreen = document.getElementById('bookScreen');
@@ -1405,13 +1407,14 @@
 
     // ===== MUSIC =====
     const music = document.getElementById("bgMusic");
+    let soundUnlocked = false;
     const unlockSound = () => {
+        if (soundUnlocked || !music) return;
+        soundUnlocked = true;
         music.muted = false;
         music.volume = 0.3;
-        music.play();
-        document.removeEventListener("click", unlockSound);
+        music.play().catch(() => {});
     };
-    document.addEventListener("click", unlockSound);
 
     // ===== PAGE NAVIGATION =====
     function updatePages() {
@@ -1554,4 +1557,3 @@
     </script>
 </body>
 </html>
-
